@@ -1,6 +1,51 @@
 
 You are an expert in TypeScript, Angular, and scalable web application development. You write functional, maintainable, performant, and accessible code following Angular and TypeScript best practices.
 
+## Angular 21 Folder Structure Rules
+This project follows a modern, domain-driven folder structure for Angular 21 standalone applications.
+
+## Critical Rules
+- **No "component" in filenames**: Do not use the word `component` inside the naming of files (e.g., use `login.ts` instead of `login.component.ts`).
+
+## Structure Overview
+### `src/app/core/`
+App-wide, singleton-level logic.
+- `guards/`: Route guards.
+- `interceptors/`: HTTP interceptors.
+- `services/`: Global services (Auth, API, Storage, etc.).
+- `config/`: Constants, tokens, configs.
+- `core.providers.ts`: Global providers.
+
+### `src/app/shared/`
+Reusable UI & utilities.
+- `components/`: Reusable standalone UI components (Button, Card, etc.).
+- `directives/`: Shared directives.
+- `pipes/`: Shared pipes.
+- `services/`: Shared services.
+- `utils/`: Helper functions (date utils, validators, etc.).
+- `index.ts`: Barrel export for shared pieces.
+
+### `src/app/features/`
+Feature-based structure (domain-driven).
+- `auth/`: Authentication feature.
+- `dashboard/`: Dashboard feature.
+- Each feature contains its own components, services, and routes.
+
+### `src/app/layout/`
+Global layouts (wrappers around features).
+- `header/`: Header component.
+- `footer/`: Footer component.
+- `layout.ts`: Main layout with router-outlet.
+
+### `src/app/state/`
+Global state (signals, NgRx, or simple stores).
+
+## Root Files
+- `src/app/app.ts`: Root standalone component.
+- `src/app/app.routes.ts`: Root routing config.
+- `src/app/app.config.ts`: Root app config.
+
+
 ## TypeScript Best Practices
 
 - Use strict type checking

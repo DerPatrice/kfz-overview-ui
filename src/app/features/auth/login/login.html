@@ -1,0 +1,80 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="card-header">
+      <div class="logo-container">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="car-icon">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.129-1.125v-3.026a2.999 2.999 0 0 0-2.198-2.898L16.5 9.75h-9L4.698 11.202a2.999 2.999 0 0 0-2.198 2.898v3.026c0 .621.508 1.125 1.129 1.125H5.25M16.5 9.75V7.875c0-.621-.504-1.125-1.125-1.125H8.625c-.621 0-1.125.504-1.125 1.125V9.75M12 9.75V7.875m-5.625 5.625h11.25" />
+        </svg>
+      </div>
+      <h2>AutoCare</h2>
+      <p>Manage your car's service intervals</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      @if (errorMessage()) {
+        <div class="error-banner">
+          <span>{{ errorMessage() }}</span>
+        </div>
+      }
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <div class="input-wrapper">
+          <input 
+            type="email" 
+            id="email" 
+            formControlName="email" 
+            placeholder="name@example.com"
+            [class.invalid]="loginForm.get('email')?.touched && loginForm.get('email')?.invalid"
+          />
+        </div>
+        @if (loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
+          <span class="error-text">
+            @if (loginForm.get('email')?.errors?.['required']) { Email is required }
+            @if (loginForm.get('email')?.errors?.['email']) { Please enter a valid email }
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrapper">
+          <input 
+            type="password" 
+            id="password" 
+            formControlName="password" 
+            placeholder="••••••••"
+            [class.invalid]="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
+          />
+        </div>
+        @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
+          <span class="error-text">
+            @if (loginForm.get('password')?.errors?.['required']) { Password is required }
+            @if (loginForm.get('password')?.errors?.['minlength']) { Password must be at least 6 characters }
+          </span>
+        }
+      </div>
+
+      <div class="form-options">
+        <label class="remember-me">
+          <input type="checkbox" />
+          Remember me
+        </label>
+        <a href="#" class="forgot-password">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="isLoading()">
+        @if (isLoading()) {
+          <span class="spinner"></span>
+          Signing in...
+        } @else {
+          Sign In
+        }
+      </button>
+    </form>
+
+    <div class="card-footer">
+      <p>Don't have an account? <a href="#" class="signup-link">Create an account</a></p>
+    </div>
+  </div>
+</div>
